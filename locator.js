@@ -67,7 +67,7 @@ function searchLocationsNear(center)
   var radius = $('#radiusSelect').val();
 
   // search url
-  var searchUrl = 'xml.php?lat=' + center.lat() + '&lng=' + center.lng() + '&radius=' + radius;
+  var searchUrl = 'json.php?lat=' + center.lat() + '&lng=' + center.lng() + '&radius=' + radius;
 
   // make ajax call with lat/lng/radius and get results as json
   var response = '';
