@@ -1,9 +1,8 @@
-// vars
-var map;
-var loaded = false;
-var markers = [];
-var infoWindow;
-var locationSelect;
+// varibles
+var map; // google map object
+var loaded = false; // has the map/result div been loaded yet?
+var markers = []; // map markers (location results)
+var infoWindow; // tool tip (location pop up)
 
 // initialize google map
 function load()
