@@ -17,7 +17,7 @@ body, html {
 #list {
   float:left;
   width:250px;
-  height:600px;
+  height:500px;
   overflow:auto;
 }
 
@@ -25,12 +25,6 @@ body, html {
   float:right;
   width:750px;
   height:500px;
-}
-
-#legend {
-  float:right;
-  width:750px;
-  height:100px;
 }
 
 #resultcount {
