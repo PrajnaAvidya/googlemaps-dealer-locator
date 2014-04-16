@@ -4,4 +4,6 @@ Google Maps Dealer Locator
 
 * It's a great reference but very dated because it uses non-parameterized queries, xml, lots of unnecessary javascript, etc.
 
-* So I ported it to more modern standards: PHP PDO, jQuery+ajax, json, and tweaked the layout a bit.
+* So I ported it to more modern standards: PHP PDO, jQuery+ajax, json, added comments, and tweaked the layout a bit.
+
+* Set database info in json.php and import sample data from maps.sql

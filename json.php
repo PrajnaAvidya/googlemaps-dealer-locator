@@ -1,4 +1,8 @@
 <?php
+// this file acts as the ajax endpoint for search queries and uses the
+// haversine formula to return a list of dealers in specified radius and
+// the results are echoed as json since that's easy to process
+
 // connect to database
 $db = new PDO('mysql:host=localhost;dbname=maps', 'root', 'root');
 
