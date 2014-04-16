@@ -2,7 +2,7 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-  <title>Google Maps AJAX + mySQL/PHP Example</title>
+  <title>Dealer Locator</title>
 
   <link rel="stylesheet" type="text/css" href="/locator.css" media="screen, projection">
 
@@ -19,6 +19,7 @@
 
 <body style="margin:0px; padding:0px;">
 
+  <!-- search box -->
   <div>
     <input type="text" id="addressInput" size="10"/>
     <select id="radiusSelect">
@@ -31,6 +32,7 @@
     <input type="button" onclick="searchLocations()" value="Search"/>
   </div>
 
+  <!-- results div (starts hidden) -->
   <div id="results">
 
     <!-- scrollable div of results -->

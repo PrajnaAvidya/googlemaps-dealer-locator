@@ -1,5 +1,5 @@
 <?php
-// Opens a connection to a mySQL server
+// connect to database
 $connection=mysql_connect ('127.0.0.1:8889', 'root', 'root');
 if (!$connection)
 {

@@ -1,7 +1,7 @@
 ee-locator
 ==========
 
-TODO: convert relevant js to jquery. convert xml to json.
+TODO: convert sql queries to pdo. port relevant js to jquery. convert xml to json.
 
 LATER TODO: turn page into EE template, hook ajax service directly into EE (either figure out how to use the ee api to do the queries or write class to interface with the database directly)
 
