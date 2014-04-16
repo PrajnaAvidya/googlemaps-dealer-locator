@@ -5,16 +5,16 @@ ini_set("display_errors", 1);
 // connect to database
 $db = new PDO('mysql:host=localhost;dbname=maps', 'root', 'root');
 
-// Get parameters from URL
+// get/sanitize parameters from URL
 $center_lat = (float)$_GET["lat"];
 $center_lng = (float)$_GET["lng"];
 $radius = (int)$_GET["radius"];
 
-// Search the rows in the markers table
+// search markers table
 $query = "SELECT address, name, lat, lng, ( 3959 * acos( cos( radians('$center_lat') ) * cos( radians( lat ) ) * cos( radians( lng ) - radians('$center_lng') ) + sin( radians('$center_lat') ) * sin( radians( lat ) ) ) ) AS distance FROM markers HAVING distance < '$radius' ORDER BY distance LIMIT 0 , 20";
 $result = $db->query($query);
 
-// markers object to be output as json
+// markers array to be output as json
 $markers = array();
 
 // iterate through rows and add markers
@@ -29,4 +29,5 @@ foreach ($result->fetchAll() as $row)
   );
 }
 
+// print json
 echo json_encode($markers);
