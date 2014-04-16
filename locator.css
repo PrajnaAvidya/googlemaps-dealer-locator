@@ -1,0 +1,26 @@
+body, html {
+  margin:0;
+  padding:0;
+  color:#000;
+  background:#ECE9E1;
+}
+
+#results {
+  float: left;
+  width:1200px;
+  margin:0 auto;
+  background:#ECE9E1;
+  display:none;
+}
+
+#list {
+  float:left;
+  width:300px;
+  background:#ECE9E1;
+}
+
+#mapcontainer {
+  float:right;
+  width:900px;
+  background:#ECE9E1;
+}
