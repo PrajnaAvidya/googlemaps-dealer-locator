@@ -7,7 +7,8 @@ body, html {
 
 #results {
   float: left;
-  width:1200px;
+  width:1000px;
+  height:600px
   margin:0 auto;
   background:#ECE9E1;
   display:none;
@@ -15,12 +16,19 @@ body, html {
 
 #list {
   float:left;
-  width:300px;
-  background:#ECE9E1;
+  width:250px;
+  height:600px;
+  overflow:auto;
 }
 
 #mapcontainer {
   float:right;
-  width:900px;
-  background:#ECE9E1;
+  width:750px;
+  height:500px;
+}
+
+#legend {
+  float:right;
+  width:750px;
+  height:100px;
 }

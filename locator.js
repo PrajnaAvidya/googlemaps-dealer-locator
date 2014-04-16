@@ -37,7 +37,7 @@ function searchLocations()
   {
     if (status == google.maps.GeocoderStatus.OK) {
       // search locations near location
-      searchLocationsNear(results[0].geometry.location);
+      searchLocationsNear(results[0].geometry.location, address);
     } else {
       alert(address + ' not found');
     }
@@ -58,7 +58,7 @@ function clearLocations()
 }
 
 // search locations near center and parse json results into markers
-function searchLocationsNear(center)
+function searchLocationsNear(center, raw_location)
 {
   // clear old results
   clearLocations();
@@ -82,7 +82,10 @@ function searchLocationsNear(center)
   var bounds = new google.maps.LatLngBounds();
 
   // html for result list on left
-  var html = '';
+  var html = '<br/>';
+
+  // count number of results
+  var results = parseInt(Object.keys(response).length);
 
   // iterate through results to add markers
   response.forEach(function(marker) {
@@ -109,6 +112,10 @@ function searchLocationsNear(center)
 
   // set dealer list
   $('#list').html(html);
+
+  // set result text
+  $('#resultcount').text(results);
+  $('#searchfrom').text(raw_location);
 
   // fit bounds
   map.fitBounds(bounds);
