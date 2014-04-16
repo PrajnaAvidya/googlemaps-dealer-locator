@@ -31,7 +31,7 @@ function searchLocations()
   // get address input
   var address = $('#addressInput').val();
 
-  // geocode address data
+  // geocode address data into lat/lng
   var geocoder = new google.maps.Geocoder();
   geocoder.geocode({address: address}, function(results, status)
   {
@@ -113,16 +113,19 @@ function createMarker(latlng, name, address)
 {
   // html inside marker
   var html = "<b>" + name + "</b> <br/>" + address;
+
   // create marker object
   var marker = new google.maps.Marker({
     map: map,
     position: latlng
   });
+
   // add tooltip to marker
   google.maps.event.addListener(marker, 'click', function() {
     infoWindow.setContent(html);
     infoWindow.open(map, marker);
   });
+
   // push to map
   markers.push(marker);
 }
