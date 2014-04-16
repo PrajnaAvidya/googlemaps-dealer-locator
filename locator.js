@@ -75,14 +75,14 @@ function searchLocationsNear(center)
     url: searchUrl,
     async: false,
     dataType: 'json',
-    success : function(json)
-    {
-      response = json;
-    }
+    success: function(json){response = json;}
   });
 
   // bounds object
   var bounds = new google.maps.LatLngBounds();
+
+  // html for result list on left
+  var html = '';
 
   // iterate through results to add markers
   response.forEach(function(marker) {
@@ -97,12 +97,18 @@ function searchLocationsNear(center)
       parseFloat(marker.lng)
     );
 
+    // add to list
+    html = html + '<b>' + name + '</b><br/>' + address + '<br/><br/>';
+
     // add marker
     createMarker(latlng, name, address);
 
     // extend map bounds if necessary
     bounds.extend(latlng);
   });
+
+  // set dealer list
+  $('#list').html(html);
 
   // fit bounds
   map.fitBounds(bounds);
