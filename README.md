@@ -1,4 +1,4 @@
-ee-locator
+Google Maps Dealer Locator
 ==========
 * This was the best tutorial I could find to make a dealer locator using google maps: https://developers.google.com/maps/articles/phpsqlsearch_v3
 
