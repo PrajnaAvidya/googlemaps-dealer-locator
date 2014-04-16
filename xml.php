@@ -29,21 +29,24 @@ if (!$result)
 }
 
 // output XML
-$dom = new DOMDocument("1.0");
+/*$dom = new DOMDocument("1.0");
 $node = $dom->createElement("markers");
 $parnode = $dom->appendChild($node);
-header("Content-type: text/xml");
+header("Content-type: text/xml");*/
+
+$markers = array();
 
 // Iterate through the rows, adding XML nodes for each
 while ($row = @mysql_fetch_assoc($result))
 {
-  $node = $dom->createElement("marker");
-  $newnode = $parnode->appendChild($node);
-  $newnode->setAttribute("name", $row['name']);
-  $newnode->setAttribute("address", $row['address']);
-  $newnode->setAttribute("lat", $row['lat']);
-  $newnode->setAttribute("lng", $row['lng']);
-  $newnode->setAttribute("distance", $row['distance']);
+  $markers[] = array(
+    'name'=>$row['name'],
+    'address'=>$row['address'],
+    'lat'=>$row['lat'],
+    'lng'=>$row['lng'],
+    'distance'=>$row['distance'],
+  );
 }
 
-echo $dom->saveXML();
+//echo $dom->saveXML();
+echo json_encode($markers);

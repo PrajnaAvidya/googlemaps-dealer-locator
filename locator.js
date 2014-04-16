@@ -29,9 +29,9 @@ function searchLocations()
   }
 
   // get address input
-  var address = document.getElementById("addressInput").value;
+  var address = $('#addressInput').val();
 
-  // getcode address data
+  // geocode address data
   var geocoder = new google.maps.Geocoder();
   geocoder.geocode({address: address}, function(results, status)
   {
@@ -57,49 +57,55 @@ function clearLocations()
   markers.length = 0;
 }
 
-// search locations near and parse xml results into markers
+// search locations near center and parse json results into markers
 function searchLocationsNear(center)
 {
   // clear old results
   clearLocations();
 
   // get search radius
-  var radius = document.getElementById('radiusSelect').value;
+  var radius = $('#radiusSelect').val();
 
-  // make search call TODO switch to jquery
+  // search url
   var searchUrl = 'xml.php?lat=' + center.lat() + '&lng=' + center.lng() + '&radius=' + radius;
-  downloadUrl(searchUrl, function(data) {
-    // parse XML TODO switch to json
-    var xml = parseXml(data);
-    // get marker nodes from xml
-    var markerNodes = xml.documentElement.getElementsByTagName("marker");
-    // bounds object
-    var bounds = new google.maps.LatLngBounds();
 
-    // place markers
-    for (var i = 0; i < markerNodes.length; i++)
+  // make ajax call with lat/lng/radius and get results as json
+  var response = '';
+  $.ajax({ type: "GET",
+    url: searchUrl,
+    async: false,
+    dataType: 'json',
+    success : function(json)
     {
-      // xml attributes
-      var name = markerNodes[i].getAttribute("name");
-      var address = markerNodes[i].getAttribute("address");
-      var distance = parseFloat(markerNodes[i].getAttribute("distance"));
-
-      // lat/lng object
-      var latlng = new google.maps.LatLng(
-        parseFloat(markerNodes[i].getAttribute("lat")),
-        parseFloat(markerNodes[i].getAttribute("lng"))
-      );
-
-      // add marker
-      createMarker(latlng, name, address);
-
-      // extend map bounds if necessary
-      bounds.extend(latlng);
+      response = json;
     }
-
-    // fit bounds
-    map.fitBounds(bounds);
   });
+
+  // bounds object
+  var bounds = new google.maps.LatLngBounds();
+
+  // iterate through results to add markers
+  response.forEach(function(marker) {
+    // get marker attributes
+    var name = marker.name;
+    var address = marker.address;
+    var distance = parseFloat(marker.distance);
+
+    // lat/lng object
+    var latlng = new google.maps.LatLng(
+      parseFloat(marker.lat),
+      parseFloat(marker.lng)
+    );
+
+    // add marker
+    createMarker(latlng, name, address);
+
+    // extend map bounds if necessary
+    bounds.extend(latlng);
+  });
+
+  // fit bounds
+  map.fitBounds(bounds);
 }
 
 // add marker to map
@@ -120,35 +126,3 @@ function createMarker(latlng, name, address)
   // push to map
   markers.push(marker);
 }
-
-// download url TODO replace with jquery
-function downloadUrl(url, callback)
-{
-  var request = window.ActiveXObject ?
-  new ActiveXObject('Microsoft.XMLHTTP') :
-  new XMLHttpRequest;
-
-  request.onreadystatechange = function() {
-    if (request.readyState == 4) {
-      request.onreadystatechange = doNothing;
-      callback(request.responseText, request.status);
-    }
-  };
-
-  request.open('GET', url, true);
-  request.send(null);
-}
-
-// parse xml TODO replace with json/jquery
-function parseXml(str) {
-  if (window.ActiveXObject) {
-    var doc = new ActiveXObject('Microsoft.XMLDOM');
-    doc.loadXML(str);
-    return doc;
-  } else if (window.DOMParser) {
-    return (new DOMParser).parseFromString(str, 'text/xml');
-  }
-}
-
-// do nothing TODO remove when obsolete
-function doNothing() {}
