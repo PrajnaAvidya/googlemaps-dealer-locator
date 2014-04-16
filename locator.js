@@ -14,6 +14,8 @@ function load()
     mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU}
   });
   infoWindow = new google.maps.InfoWindow();
+
+  return true;
 }
 
 // called when user hits search
@@ -23,8 +25,7 @@ function searchLocations()
   if (loaded == false)
   {
     $('#results').show();
-    load();
-    loaded = true;
+    loaded = load();
   }
 
   // get address input
