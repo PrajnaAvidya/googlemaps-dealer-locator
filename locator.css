@@ -5,6 +5,11 @@ body, html {
   background:#ECE9E1;
 }
 
+#map {
+  width: 100%;
+  height: 100%
+}
+
 #results {
   float: left;
   width:1000px;
