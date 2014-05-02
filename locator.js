@@ -7,7 +7,7 @@ var loaded = false; // has the map/result div been loaded yet?
 var markers = []; // map markers (location results)
 var infoWindow; // tool tip (location pop up)
 
-// enable search when user hits submit
+// enable search when user hits enter
 $( document ).ready(function() {
   $('#addressInput').keydown(function(e){
     if (e.keyCode == 13) {
