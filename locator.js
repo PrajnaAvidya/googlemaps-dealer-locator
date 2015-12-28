@@ -1,7 +1,7 @@
 // search processing & map manipulation happens in this file
 // actual search/results are returned from json.php
 
-// varibles
+// variables
 var map; // google map object
 var loaded = false; // has the map/result div been loaded yet?
 var markers = []; // map markers (location results)
